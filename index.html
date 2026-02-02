@@ -201,6 +201,84 @@
             box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
         }
 
+        .cert-clickable {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cert-clickable:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 245, 255, 0.5);
+        }
+
+        /* Certificate Modal */
+        .cert-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .cert-modal.active {
+            display: flex;
+        }
+
+        .cert-content {
+            max-width: 90%;
+            max-height: 90%;
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            border: 2px solid #00f5ff;
+            box-shadow: 0 0 50px rgba(0, 245, 255, 0.5);
+        }
+
+        .cert-image {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .cert-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(255, 0, 255, 0.2);
+            border: 2px solid #ff00ff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .cert-close:hover {
+            background: rgba(255, 0, 255, 0.5);
+            transform: rotate(90deg);
+        }
+
+        .cert-title {
+            text-align: center;
+            color: #00f5ff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
         .contact-info {
             margin: 30px 0;
         }
@@ -480,14 +558,15 @@
                 </div>
 
                 <h3 style="margin-top: 40px;">Professional Certifications</h3>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 20px;">Click on any certificate to view</p>
                 
                 <div class="skills-container">
-                    <span class="skill-tag">Python Programming (2026) - University of Moratuwa</span>
-                    <span class="skill-tag">Machine Learning using Python (2026) - Simplilearn</span>
-                    <span class="skill-tag">AI/ML Engineer Stage 1 - SLIIT</span>
-                    <span class="skill-tag">Cyber Security Essentials (2018) - VTA</span>
-                    <span class="skill-tag">IT Essentials (2018) - VTA</span>
-                    <span class="skill-tag">Computer Based Application (2018) - VTA</span>
+                    <span class="skill-tag cert-clickable" onclick="openCertificate('python')">Python Programming (2026) - University of Moratuwa</span>
+                    <span class="skill-tag cert-clickable" onclick="openCertificate('ml')">Machine Learning using Python (2026) - Simplilearn</span>
+                    <span class="skill-tag cert-clickable" onclick="openCertificate('aiml')">AI/ML Engineer Stage 1 - SLIIT</span>
+                    <span class="skill-tag cert-clickable" onclick="openCertificate('cyber')">Cyber Security Essentials (2018) - VTA</span>
+                    <span class="skill-tag cert-clickable" onclick="openCertificate('it')">IT Essentials (2018) - VTA</span>
+                    <span class="skill-tag cert-clickable" onclick="openCertificate('cba')">Computer Based Application (2018) - VTA</span>
                 </div>
             </div>
         </section>
@@ -524,6 +603,15 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div id="certModal" class="cert-modal" onclick="closeCertificate(event)">
+        <div class="cert-content" onclick="event.stopPropagation()">
+            <span class="cert-close" onclick="closeCertificate()">&times;</span>
+            <h3 class="cert-title" id="certTitle">Certificate</h3>
+            <img id="certImage" class="cert-image" src="" alt="Certificate">
+        </div>
     </div>
 
     <script>
@@ -699,6 +787,56 @@
         }
 
         init();
+
+        // Certificate Modal Functions
+        const certificates = {
+            python: {
+                title: 'Python Programming Certificate - University of Moratuwa',
+                image: 'assets/images/certificates/python-cert.jpg'
+            },
+            ml: {
+                title: 'Machine Learning using Python - Simplilearn',
+                image: 'assets/images/certificates/ml-cert.jpg'
+            },
+            aiml: {
+                title: 'AI/ML Engineer Stage 1 - SLIIT',
+                image: 'assets/images/certificates/aiml-cert.jpg'
+            },
+            cyber: {
+                title: 'Cyber Security Essentials - VTA',
+                image: 'assets/images/certificates/cyber-cert.jpg'
+            },
+            it: {
+                title: 'IT Essentials - VTA',
+                image: 'assets/images/certificates/it-cert.jpg'
+            },
+            cba: {
+                title: 'Computer Based Application - VTA',
+                image: 'assets/images/certificates/cba-cert.jpg'
+            }
+        };
+
+        function openCertificate(certId) {
+            const cert = certificates[certId];
+            if (cert) {
+                document.getElementById('certTitle').textContent = cert.title;
+                document.getElementById('certImage').src = cert.image;
+                document.getElementById('certModal').classList.add('active');
+            }
+        }
+
+        function closeCertificate(event) {
+            if (!event || event.target === event.currentTarget) {
+                document.getElementById('certModal').classList.remove('active');
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCertificate();
+            }
+        });
     </script>
 </body>
 </html>
