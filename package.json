@@ -1,0 +1,39 @@
+{
+  "name": "portfolio-3d",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "seed": "tsx src/scripts/seed.ts"
+  },
+  "dependencies": {
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "mongoose": "^8.10.1",
+    "jsonwebtoken": "^9.0.2",
+    "bcrypt": "^5.1.1",
+    "@reduxjs/toolkit": "^2.5.1",
+    "react-redux": "^9.2.0",
+    "three": "^0.160.0",
+    "lucide-react": "^0.475.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/bcrypt": "^5.0.2",
+    "@types/three": "^0.160.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "tsx": "^4.19.2"
+  }
+}
+
