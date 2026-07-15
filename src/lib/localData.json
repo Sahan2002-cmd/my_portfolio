@@ -58,7 +58,7 @@
     {
       "_id": "proj_1781254096810",
       "title": "Gym Management",
-      "description": "test",
+      "description": "Developed a full-stack Gym Management System to streamline gym operations, member management, and administrative workflows. The system supports role-based access for Admin, Trainer, and Member, providing secure authentication with Google OAuth and OTP verification for account registration, password reset, and account deletion. Key modules include membership and payment management, inventory management, RFID-based attendance tracking, workout and schedule management, complaint management, and administrative dashboards. The application was built using ASP.NET (C# Web API), React.js with Redux, and Microsoft SQL Server, utilizing stored procedures and database triggers to ensure efficient data processing, validation, and business logic.",
       "date": "March 2026 to June 2026",
       "techStack": [
         "SQL",
