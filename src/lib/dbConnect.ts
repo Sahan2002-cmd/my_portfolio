@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import appConfig from '../../index.js';
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
@@ -22,11 +23,11 @@ if (!cached) {
 }
 
 async function dbConnect() {
-  const MONGODB_URI = process.env.MONGODB_URI;
+  const MONGODB_URI = appConfig.mongoUri;
 
   if (!MONGODB_URI) {
     throw new Error(
-      'Please define the MONGODB_URI environment variable inside .env.local'
+      'Please define the MongoDB connection URI inside index.js'
     );
   }
 

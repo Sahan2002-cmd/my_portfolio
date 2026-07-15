@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import Project from '../lib/models/Project';
@@ -7,28 +5,12 @@ import Skill from '../lib/models/Skill';
 import Experience from '../lib/models/Experience';
 import Certificate from '../lib/models/Certificate';
 import Admin from '../lib/models/Admin';
+import appConfig from '../../index.js';
 
-// Load .env.local
-const envPath = path.resolve(process.cwd(), '.env.local');
-if (fs.existsSync(envPath)) {
-  const envConfig = fs.readFileSync(envPath, 'utf8');
-  for (const line of envConfig.split('\n')) {
-    const trimmed = line.trim();
-    if (trimmed && !trimmed.startsWith('#')) {
-      const firstEqual = trimmed.indexOf('=');
-      if (firstEqual !== -1) {
-        const key = trimmed.slice(0, firstEqual).trim();
-        const value = trimmed.slice(firstEqual + 1).replace(/^['"]|['"]$/g, '').trim();
-        process.env[key] = value;
-      }
-    }
-  }
-}
-
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = appConfig.mongoUri;
 
 if (!MONGODB_URI) {
-  console.error('Error: Please define the MONGODB_URI environment variable inside .env.local');
+  console.error('Error: Please define the MongoDB connection URI inside index.js');
   process.exit(1);
 }
 
@@ -198,10 +180,10 @@ async function seed() {
 
     // Seed Admin Login
     console.log('Seeding default Admin...');
-    const defaultPassword = process.env.ADMIN_PASSWORD || 'Admin@123';
+    const defaultPassword = appConfig.adminPassword || 'Admin@123';
     const hashedPassword = await bcrypt.hash(defaultPassword, 10);
     await Admin.create({
-      username: process.env.ADMIN_USERNAME || 'admin',
+      username: appConfig.adminUsername || 'admin',
       password: hashedPassword
     });
 
