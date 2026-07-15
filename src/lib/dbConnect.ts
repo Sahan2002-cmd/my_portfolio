@@ -23,11 +23,11 @@ if (!cached) {
 }
 
 async function dbConnect() {
-  const MONGODB_URI = appConfig.mongoUri;
+  const MONGODB_URI = process.env.MONGODB_URI || appConfig.mongoUri;
 
   if (!MONGODB_URI) {
     throw new Error(
-      'Please define the MongoDB connection URI inside index.js'
+      'Please define the MongoDB connection URI inside index.js or environment variables'
     );
   }
 
@@ -38,8 +38,8 @@ async function dbConnect() {
   if (!cached!.promise) {
     const opts = {
       bufferCommands: false,
-      serverSelectionTimeoutMS: 3000, // Fail fast if unreachable (e.g. IP whitelist block)
-      connectTimeoutMS: 3000,         // Snappy socket connection timeout
+      serverSelectionTimeoutMS: 15000, // Fail fast but allow cold-start on serverless (15s)
+      connectTimeoutMS: 15000,         // 15s socket connection timeout
     };
 
     cached!.promise = mongoose.connect(MONGODB_URI!, opts).then((mongooseInstance) => {

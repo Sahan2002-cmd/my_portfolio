@@ -37,9 +37,9 @@ export async function POST(req: Request) {
         isValid = await bcrypt.compare(password, admin.password);
       }
     } else {
-      // 2. Fallback to the shared config values if no database admin exists yet or DB connection fails
-      const adminUsernameEnv = appConfig.adminUsername || 'admin';
-      const adminPasswordEnv = appConfig.adminPassword || 'Admin@123';
+      // 2. Fallback to the env or shared config values if no database admin exists yet or DB connection fails
+      const adminUsernameEnv = process.env.ADMIN_USERNAME || appConfig.adminUsername || 'admin';
+      const adminPasswordEnv = process.env.ADMIN_PASSWORD || appConfig.adminPassword || 'Admin@123';
 
       if (username === adminUsernameEnv) {
         if (

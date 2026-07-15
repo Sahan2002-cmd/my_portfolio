@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import appConfig from '../../index.js';
 
-const JWT_SECRET = appConfig.jwtSecret || 'fallback-secret-for-dev-only-change-this-in-env';
+const JWT_SECRET = process.env.JWT_SECRET || appConfig.jwtSecret || 'fallback-secret-for-dev-only-change-this-in-env';
 
 export interface AdminTokenPayload {
   userId: string;

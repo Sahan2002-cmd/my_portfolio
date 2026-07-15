@@ -7,10 +7,10 @@ import Certificate from '../lib/models/Certificate';
 import Admin from '../lib/models/Admin';
 import appConfig from '../../index.js';
 
-const MONGODB_URI = appConfig.mongoUri;
+const MONGODB_URI = process.env.MONGODB_URI || appConfig.mongoUri;
 
 if (!MONGODB_URI) {
-  console.error('Error: Please define the MongoDB connection URI inside index.js');
+  console.error('Error: Please define the MongoDB connection URI inside index.js or environment variables');
   process.exit(1);
 }
 
