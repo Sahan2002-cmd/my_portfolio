@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     }
 
     const data = await req.json();
-    
+
     if (!data.title || !data.description || !data.date || !data.techStack) {
       return NextResponse.json(
         { error: 'Missing required fields' },

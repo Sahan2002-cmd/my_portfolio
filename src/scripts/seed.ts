@@ -1,3 +1,8 @@
+import dns from 'dns';
+if (typeof dns.setDefaultResultOrder === 'function') {
+  dns.setDefaultResultOrder('ipv4first');
+}
+
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import Project from '../lib/models/Project';

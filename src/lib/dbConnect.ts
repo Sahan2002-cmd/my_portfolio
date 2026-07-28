@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
+import dns from 'dns';
 import appConfig from '../../index.js';
+
+if (typeof dns.setDefaultResultOrder === 'function') {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
