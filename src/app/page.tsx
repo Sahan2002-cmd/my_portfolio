@@ -11,6 +11,7 @@ import {
 } from '@/store/portfolioSlice';
 
 import ThreeBackground from '@/components/ThreeBackground';
+import PhoenixVideoModal from '@/components/PhoenixVideoModal';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -34,6 +35,9 @@ export default function Home() {
     <div className="relative min-h-screen bg-bg-primary text-white overflow-hidden transition-colors duration-300">
       {/* 3D Interactive Canvas Background */}
       <ThreeBackground />
+
+      {/* Intro Phoenix Video Modal on First Interaction */}
+      <PhoenixVideoModal />
 
       {/* Navigation Bar */}
       <Navbar />
