@@ -11,19 +11,12 @@ export default function PhoenixVideoModal() {
 
   useEffect(() => {
     const hasSeenVideo = sessionStorage.getItem('hasSeenPhoenixVideo');
-    if (hasSeenVideo) return;
-
-    const handleFirstClick = () => {
-      if (sessionStorage.getItem('hasSeenPhoenixVideo')) return;
+    
+    if (!hasSeenVideo) {
+      // Mark as seen and open modal immediately on page load
       sessionStorage.setItem('hasSeenPhoenixVideo', 'true');
       setIsOpen(true);
-    };
-
-    window.addEventListener('click', handleFirstClick, { capture: true, once: true });
-
-    return () => {
-      window.removeEventListener('click', handleFirstClick, { capture: true });
-    };
+    }
   }, []);
 
   // When modal opens, try to play (muted for autoplay policy)
