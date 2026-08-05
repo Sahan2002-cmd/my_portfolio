@@ -747,26 +747,31 @@ export default function AdminDashboard() {
                       accept="image/*,application/pdf"
                       onChange={(e) => {
                         const file = e.target.files?.[0];
-                        if (file) {
-                          const reader = new FileReader();
-                          reader.onload = (event) => {
-                            const base64 = event.target?.result as string;
-                            const fileType = file.type.includes('pdf') ? 'pdf' : 'image';
-                            setExperienceForm({
-                              ...experienceForm,
-                              attachment: base64,
-                              attachmentType: fileType,
-                              attachmentName: file.name
-                            });
-                          };
-                          reader.readAsDataURL(file);
+                        if (!file) return;
+                        const MAX_SIZE_MB = 5;
+                        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+                          alert(`File is too large. Maximum allowed size is ${MAX_SIZE_MB}MB.`);
+                          e.target.value = '';
+                          return;
                         }
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                          const base64 = event.target?.result as string;
+                          const fileType = file.type.includes('pdf') ? 'pdf' : 'image';
+                          setExperienceForm(prev => ({
+                            ...prev,
+                            attachment: base64,
+                            attachmentType: fileType,
+                            attachmentName: file.name,
+                          }));
+                        };
+                        reader.readAsDataURL(file);
                       }}
                       className="w-full bg-white/2 border border-white/10 hover:border-white/20 focus:border-[#00f5ff] rounded-xl px-4 py-2 text-white focus:outline-none transition-all text-xs"
                     />
                     {experienceForm.attachmentName && (
                       <p className="text-xxs text-[#00f5ff] truncate mt-1">
-                        Attached: {experienceForm.attachmentName}
+                        ✓ Attached: {experienceForm.attachmentName}
                       </p>
                     )}
                   </div>
@@ -815,26 +820,31 @@ export default function AdminDashboard() {
                       accept="image/*,application/pdf"
                       onChange={(e) => {
                         const file = e.target.files?.[0];
-                        if (file) {
-                          const reader = new FileReader();
-                          reader.onload = (event) => {
-                            const base64 = event.target?.result as string;
-                            const fileType = file.type.includes('pdf') ? 'pdf' : 'image';
-                            setCertificateForm({
-                              ...certificateForm,
-                              attachment: base64,
-                              attachmentType: fileType,
-                              attachmentName: file.name
-                            });
-                          };
-                          reader.readAsDataURL(file);
+                        if (!file) return;
+                        const MAX_SIZE_MB = 5;
+                        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+                          alert(`File is too large. Maximum allowed size is ${MAX_SIZE_MB}MB.`);
+                          e.target.value = '';
+                          return;
                         }
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                          const base64 = event.target?.result as string;
+                          const fileType = file.type.includes('pdf') ? 'pdf' : 'image';
+                          setCertificateForm(prev => ({
+                            ...prev,
+                            attachment: base64,
+                            attachmentType: fileType,
+                            attachmentName: file.name,
+                          }));
+                        };
+                        reader.readAsDataURL(file);
                       }}
                       className="w-full bg-white/2 border border-white/10 hover:border-white/20 focus:border-[#00f5ff] rounded-xl px-4 py-2 text-white focus:outline-none transition-all text-xs"
                     />
                     {certificateForm.attachmentName && (
                       <p className="text-xxs text-[#00f5ff] truncate mt-1">
-                        Attached: {certificateForm.attachmentName}
+                        ✓ Attached: {certificateForm.attachmentName}
                       </p>
                     )}
                   </div>
