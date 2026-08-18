@@ -44,7 +44,10 @@ export const experiencesData = [
     period: 'September 2022 - September 2023',
     description: 'Managed cash deposits, withdrawals, passbook services, cheque processing, account operations, and debit card issuance. Developed strong attention to detail and customer service skills in a professional banking environment.',
     type: 'work',
-    order: 0
+    order: 0,
+    attachment: '/assets/documents/service_letter.pdf',
+    attachmentType: 'pdf',
+    attachmentName: 'Service Letter - Peoples Bank.pdf'
   },
   // Education
   {

@@ -60,7 +60,10 @@ export default function About() {
             {workExperience.map((exp: any, index: number) => (
               <div
                 key={exp._id || index}
-                className="p-6 bg-white/3 hover:bg-white/5 border border-white/5 hover:border-[#00f5ff]/20 rounded-xl transition-all duration-300 group"
+                onClick={() => exp.attachment && setActiveAttachment(exp)}
+                className={`p-6 bg-white/3 hover:bg-white/5 border border-white/5 hover:border-[#00f5ff]/20 rounded-xl transition-all duration-300 group ${
+                  exp.attachment ? 'cursor-pointer hover:shadow-[0_0_20px_rgba(0,245,255,0.05)]' : ''
+                }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                   <div className="flex items-center gap-2">
@@ -69,7 +72,10 @@ export default function About() {
                     </h4>
                     {exp.attachment && (
                       <button
-                        onClick={() => setActiveAttachment(exp)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveAttachment(exp);
+                        }}
                         className="p-1.5 text-gray-400 hover:text-[#00f5ff] hover:bg-white/5 border border-white/10 rounded-lg transition-all hover:cursor-pointer"
                         title="View Document"
                       >
