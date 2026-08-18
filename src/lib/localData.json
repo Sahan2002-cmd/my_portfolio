@@ -8,7 +8,10 @@
       "techStack": [
         "MERN Stack"
       ],
-      "order": 0
+      "order": 0,
+      "attachment": "/assets/images/projects/epic-computer.jpg",
+      "attachmentType": "image",
+      "attachmentName": "Epic Computer E-Commerce store.jpg"
     },
     {
       "_id": "proj_2",

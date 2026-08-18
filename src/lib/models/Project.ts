@@ -8,6 +8,9 @@ export interface IProject extends Document {
   link?: string;
   github?: string;
   order: number;
+  attachment?: string;
+  attachmentType?: string;
+  attachmentName?: string;
 }
 
 const ProjectSchema: Schema = new Schema(
@@ -19,6 +22,9 @@ const ProjectSchema: Schema = new Schema(
     link: { type: String, trim: true },
     github: { type: String, trim: true },
     order: { type: Number, default: 0 },
+    attachment: { type: String },
+    attachmentType: { type: String },
+    attachmentName: { type: String },
   },
   { timestamps: true }
 );

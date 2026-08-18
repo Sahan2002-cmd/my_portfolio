@@ -12,7 +12,10 @@ const initialData = {
       description: 'E-commerce web application for a computer hardware business, enabling online and in-store purchases. Features AI chatbot support, user management, product management, order & billing management, and showroom billing system.',
       date: 'December 2025',
       techStack: ['MERN Stack'],
-      order: 0
+      order: 0,
+      attachment: '/assets/images/projects/epic-computer.jpg',
+      attachmentType: 'image',
+      attachmentName: 'Epic Computer E-Commerce store.jpg'
     },
     {
       _id: 'proj_2',

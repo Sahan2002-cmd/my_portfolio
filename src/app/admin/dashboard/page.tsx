@@ -43,6 +43,9 @@ export default function AdminDashboard() {
     link: '',
     github: '',
     order: 0,
+    attachment: '',
+    attachmentType: '',
+    attachmentName: '',
   });
 
   const [skillForm, setSkillForm] = useState({
@@ -126,7 +129,7 @@ export default function AdminDashboard() {
 
   const handleAddClick = () => {
     setEditingItem(null);
-    setProjectForm({ title: '', description: '', date: '', techStack: '', link: '', github: '', order: 0 });
+    setProjectForm({ title: '', description: '', date: '', techStack: '', link: '', github: '', order: 0, attachment: '', attachmentType: '', attachmentName: '' });
     setSkillForm({ name: '', category: 'Programming Languages', order: 0 });
     setExperienceForm({ role: '', company: '', period: '', description: '', type: 'work', order: 0, attachment: '', attachmentType: '', attachmentName: '' });
     setCertificateForm({ title: '', organization: '', year: '', credentialId: '', imageKey: '', status: 'Finished', attachment: '', attachmentType: '', attachmentName: '' });
@@ -136,7 +139,7 @@ export default function AdminDashboard() {
   const handleEditClick = (item: any) => {
     setEditingItem(item);
     if (activeTab === 'projects') {
-      setProjectForm({ title: item.title, description: item.description, date: item.date, techStack: item.techStack.join(', '), link: item.link || '', github: item.github || '', order: item.order || 0 });
+      setProjectForm({ title: item.title, description: item.description, date: item.date, techStack: item.techStack.join(', '), link: item.link || '', github: item.github || '', order: item.order || 0, attachment: item.attachment || '', attachmentType: item.attachmentType || '', attachmentName: item.attachmentName || '' });
     } else if (activeTab === 'skills') {
       setSkillForm({ name: item.name, category: item.category, order: item.order || 0 });
     } else if (activeTab === 'experience') {
@@ -754,6 +757,28 @@ export default function AdminDashboard() {
                   <div className="space-y-1">
                     <label className="text-xs text-gray-400 font-semibold uppercase">Description</label>
                     <textarea rows={4} value={projectForm.description} onChange={(e) => setProjectForm({ ...projectForm, description: e.target.value })} required className="w-full bg-white/2 border border-white/10 hover:border-white/20 focus:border-[#00f5ff] rounded-xl px-4 py-2.5 text-white focus:outline-none transition-all resize-none" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs text-gray-400 font-semibold uppercase">Upload Attachment (Image or Video Clip)</label>
+                    <input
+                      type="file"
+                      accept="image/*,video/mp4,video/webm,video/ogg"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        if (file.size > 10 * 1024 * 1024) { alert('File is too large. Maximum allowed size is 10MB.'); e.target.value = ''; return; }
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                          const base64 = event.target?.result as string;
+                          setProjectForm(prev => ({ ...prev, attachment: base64, attachmentType: file.type.includes('video') ? 'video' : 'image', attachmentName: file.name }));
+                        };
+                        reader.readAsDataURL(file);
+                      }}
+                      className="w-full bg-white/2 border border-white/10 hover:border-white/20 focus:border-[#00f5ff] rounded-xl px-4 py-2 text-white focus:outline-none transition-all text-xs"
+                    />
+                    {projectForm.attachmentName && (
+                      <p className="text-xxs text-[#00f5ff] truncate mt-1">✓ Attached: {projectForm.attachmentName}</p>
+                    )}
                   </div>
                 </>
               )}

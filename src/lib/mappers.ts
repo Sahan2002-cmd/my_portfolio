@@ -9,6 +9,9 @@ export function rowToProject(row: any) {
     link: row.link,
     github: row.github,
     order: row.order,
+    attachment: row.attachment,
+    attachmentType: row.attachment_type,
+    attachmentName: row.attachment_name,
   };
 }
 
@@ -21,6 +24,9 @@ export function projectToRow(data: any) {
   if (data.link !== undefined) row.link = data.link;
   if (data.github !== undefined) row.github = data.github;
   if (data.order !== undefined) row.order = data.order;
+  if (data.attachment !== undefined) row.attachment = data.attachment;
+  if (data.attachmentType !== undefined) row.attachment_type = data.attachmentType;
+  if (data.attachmentName !== undefined) row.attachment_name = data.attachmentName;
   return row;
 }
 
